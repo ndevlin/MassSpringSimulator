@@ -23,9 +23,9 @@ int main(int argc, char* argv[])
     SimulationDriver<T,dim> driver;
 
     // set up mass spring system
-    T youngs_modulus = 0;
-    T damping_coeff = 0; 
-    T dt = 0;
+    T youngs_modulus = 0.5;
+    T damping_coeff = 0.2;
+    T dt = 0.01;
 
     // node data
     std::vector<T> m;
