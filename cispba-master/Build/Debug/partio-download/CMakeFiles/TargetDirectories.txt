@@ -1,0 +1,3 @@
+/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Debug/partio-download/CMakeFiles/rebuild_cache.dir
+/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Debug/partio-download/CMakeFiles/edit_cache.dir
+/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Debug/partio-download/CMakeFiles/partio-download.dir

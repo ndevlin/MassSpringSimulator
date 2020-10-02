@@ -1,0 +1,13 @@
+# Target labels
+ partio-download
+# Source files and their labels
+/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Debug/partio-download/CMakeFiles/partio-download
+/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Debug/partio-download/CMakeFiles/partio-download.rule
+/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Debug/partio-download/CMakeFiles/partio-download-complete.rule
+/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Debug/partio-download/partio-download-prefix/src/partio-download-stamp/partio-download-install.rule
+/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Debug/partio-download/partio-download-prefix/src/partio-download-stamp/partio-download-mkdir.rule
+/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Debug/partio-download/partio-download-prefix/src/partio-download-stamp/partio-download-download.rule
+/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Debug/partio-download/partio-download-prefix/src/partio-download-stamp/partio-download-patch.rule
+/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Debug/partio-download/partio-download-prefix/src/partio-download-stamp/partio-download-configure.rule
+/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Debug/partio-download/partio-download-prefix/src/partio-download-stamp/partio-download-build.rule
+/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Debug/partio-download/partio-download-prefix/src/partio-download-stamp/partio-download-test.rule

@@ -13,6 +13,9 @@
 
 int main(int argc, char* argv[])
 {
+
+    std::cout << "Starting" << std::endl;
+
     using T = float;
     constexpr int dim = 3;
     using TV = Eigen::Matrix<T,dim,1>;
@@ -90,6 +93,8 @@ int main(int argc, char* argv[])
     driver.ms.rest_length = rest_length;
 
     driver.run(120);
+
+    std::cout << "Done" << std::endl;
 
     return 0;
 }
