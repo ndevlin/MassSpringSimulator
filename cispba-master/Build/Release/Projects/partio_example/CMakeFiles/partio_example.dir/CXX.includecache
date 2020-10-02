@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Projects/partio_example/main.cpp
+Partio.h
+-
+vector
+-
+string
+-
+
+partio-src/src/lib/Partio.h
+string
+-
+vector
+-
+map
+-
+stdint.h
+-
+PartioAttribute.h
+partio-src/src/lib/PartioAttribute.h
+PartioIterator.h
+partio-src/src/lib/PartioIterator.h
+
+partio-src/src/lib/PartioAttribute.h
+
+partio-src/src/lib/PartioIterator.h
+cassert
+-
+vector
+-
+iostream
+-
+PartioAttribute.h
+partio-src/src/lib/PartioAttribute.h
+

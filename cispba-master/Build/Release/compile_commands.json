@@ -1,0 +1,102 @@
+[
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/io/BGEO.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/BGEO.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/BGEO.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/io/BIN.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/BIN.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/BIN.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/io/GEO.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/GEO.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/GEO.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/io/MC.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/MC.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/MC.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/io/PDA.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/PDA.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/PDA.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/io/PDB.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/PDB.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/PDB.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/io/PDC.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/PDC.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/PDC.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/io/PTC.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/PTC.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/PTC.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/io/PTS.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/PTS.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/PTS.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/io/ParticleIO.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/ParticleIO.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/ParticleIO.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/io/RIB.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/RIB.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/RIB.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/io/ZIP.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/ZIP.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/io/ZIP.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/core/Particle.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/core/Particle.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/core/Particle.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/core/ParticleCaching.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/core/ParticleCaching.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/core/ParticleCaching.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/core/ParticleHeaders.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/core/ParticleHeaders.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/core/ParticleHeaders.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/core/ParticleSimple.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/core/ParticleSimple.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/core/ParticleSimple.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-build/src/lib",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -I/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/src/lib -fPIC -O3 -DNDEBUG   -Wextra -Wno-unused-parameter -std=gnu++14 -o CMakeFiles/partio.dir/core/ParticleSimpleInterleave.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/core/ParticleSimpleInterleave.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib/core/ParticleSimpleInterleave.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Projects/partio_example",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -isystem /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/partio-src/src/lib  -fPIC -Wall -Werror=all -Wextra -Wno-unused-parameter -march=native -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/partio_example.dir/main.cpp.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Projects/partio_example/main.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Projects/partio_example/main.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Projects/eigen_example",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -isystem /usr/local/include/eigen3  -fPIC -Wall -Werror=all -Wextra -Wno-unused-parameter -march=native -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/eigen_example.dir/main.cpp.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Projects/eigen_example/main.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Projects/eigen_example/main.cpp"
+},
+{
+  "directory": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Projects/mass_spring",
+  "command": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/c++ -DCISPBA_PLUGIN_DIR=\\\"/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Build/Release/Plugins\\\" -isystem /usr/local/include/eigen3  -fPIC -Wall -Werror=all -Wextra -Wno-unused-parameter -march=native -O3 -DNDEBUG -std=gnu++14 -o CMakeFiles/mass_spring.dir/main.cpp.o -c /Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Projects/mass_spring/main.cpp",
+  "file": "/Users/Nathan/Desktop/PennHwork/563PhysBased/Project1/Project1Repo/563Project1/cispba-master/Projects/mass_spring/main.cpp"
+}
+]
