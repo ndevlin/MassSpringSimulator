@@ -86,7 +86,28 @@ int main(int argc, char* argv[])
             position[2] -= clothHeight / ((T)clothHeightIndices - 1.0);
         }
 
+        int r = 0;
+        int c = 0;
 
+        for(r = 0; r < clothHeightIndices - 1; r++)
+        {
+            for(c = 0; c < clothWidthIndices - 1; c++)
+            {
+                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, r * clothHeightIndices + c + 1));
+                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c));
+
+
+            }
+            segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c));
+        }
+
+        for(c = 0; c < clothWidthIndices - 1; c++)
+        {
+            segments.push_back(Eigen::Matrix<int,2,1>(c + clothHeightIndices * (clothHeightIndices - 1),
+                     clothHeightIndices * (clothHeightIndices - 1) + c + 1));
+
+
+        }
 
 
 
