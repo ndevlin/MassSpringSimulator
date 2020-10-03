@@ -53,8 +53,50 @@ int main(int argc, char* argv[])
             4. Set boundary condition (node_is_fixed) and helper function (to achieve moving boundary condition).
             5. Generate quad mesh for rendering.
         */
-        driver.helper = [&](T t, T dt) {
+
+        int pointNumber = 1;
+
+        int clothWidthIndices = 10;
+        int clothHeightIndices = 10;
+
+        T clothWidth = 2.0;
+        T clothHeight = 2.0;
+
+        TV position = TV(0.0, 0.0, 2.0);
+
+        for(int r = 0; r < clothHeightIndices; r++)
+        {
+            for(int c = 0; c < clothWidthIndices; c++) {
+
+                std::cout << pointNumber << ": " <<
+                    position[0] << "," << position[1] << "," << position[2]
+                    << std::endl;
+                pointNumber++;
+
+
+                x.push_back(TV(position));
+                m.push_back(0.1);
+                v.push_back(TV(0.0, 0.0, 0.0));
+
+
+                position[0] += clothWidth / ((T) clothWidthIndices - 1.0);
+
+            }
+            position[0] = 0.0;
+            position[2] -= clothHeight / ((T)clothHeightIndices - 1.0);
+        }
+
+
+
+
+
+
+        driver.helper = [&](T t, T dt){
             // TODO
+
+
+
+
         };
         driver.test="cloth";
     }
