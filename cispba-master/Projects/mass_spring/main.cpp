@@ -75,9 +75,9 @@ int main(int argc, char* argv[])
 
 
                 x.push_back(TV(position));
+                node_is_fixed.push_back(false);
                 m.push_back(0.1);
                 v.push_back(TV(0.0, 0.0, 0.0));
-
 
                 position[0] += clothWidth / ((T) clothWidthIndices - 1.0);
 
@@ -111,17 +111,20 @@ int main(int argc, char* argv[])
         {
             segments.push_back(Eigen::Matrix<int,2,1>(c + clothHeightIndices * (clothHeightIndices - 1),
                      clothHeightIndices * (clothHeightIndices - 1) + c + 1));
-
-
         }
 
 
+        for(Eigen::Matrix<int,2,1> seg : segments)
+        {
+            TV vec = x[seg[0]] - x[seg[1]];
+            rest_length.push_back(vec.norm());
+        }
 
+        node_is_fixed[0] = true;
+        node_is_fixed[node_is_fixed.size() - 1] = true;
 
         driver.helper = [&](T t, T dt){
             // TODO
-
-
 
 
         };

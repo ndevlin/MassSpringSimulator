@@ -25,6 +25,9 @@ public:
     void evaluateSpringForces(std::vector<TV >& f)
     {
         // TODO: evaluate spring force
+
+
+
     }
 
     void evaluateDampingForces(std::vector<TV >& f)

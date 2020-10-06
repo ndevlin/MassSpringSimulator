@@ -64,7 +64,11 @@ public:
 
         for(int i = 0; i < ms.x.size(); i++)
         {
-            ms.x[i](1) -= 0.02;
+            if(ms.node_is_fixed[i] != true)
+            {
+                ms.v[i] += gravity / ms.m[i] * dt;
+                ms.x[i] += ms.v[i] * dt;
+            }
         }
 
     }
