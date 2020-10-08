@@ -26,6 +26,23 @@ public:
     {
         // TODO: evaluate spring force
 
+        for(int i = 0; i < x.size(); i++)
+        {
+            f.push_back(TV(0.0, 0.0, 0.0));
+        }
+
+        for(int i = 0; i < segments.size(); i++)
+        {
+            TV x_ij = x[segments[i][0]] - x[segments[i][1]];
+
+            TV d = x_ij.normalized();
+
+            T f_Scalar = -1 * youngs_modulus * (x_ij.norm() / rest_length[i] - 1.0);
+
+            f[segments[i][0]] += f_Scalar * d;
+
+            f[segments[i][1]] += -1.0 * f_Scalar * d;
+        }
 
 
     }

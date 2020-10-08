@@ -66,7 +66,12 @@ public:
         {
             if(ms.node_is_fixed[i] != true)
             {
+                // Add gravitational force
                 ms.v[i] += gravity / ms.m[i] * dt;
+
+                ms.v[i] += dt * f_spring[i];
+
+
                 ms.x[i] += ms.v[i] * dt;
             }
         }
