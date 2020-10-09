@@ -24,7 +24,7 @@ int main(int argc, char* argv[])
 
     // set up mass spring system
     T youngs_modulus = 100000.0;
-    T damping_coeff = 0.1;
+    T damping_coeff = 0.5;
     T dt = 0.0001;
 
     // node data

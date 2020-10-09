@@ -69,13 +69,14 @@ public:
                 // Add gravitational force
                 ms.v[i] += gravity / ms.m[i] * dt;
 
-                ms.v[i] += dt * f_spring[i];
+                ms.v[i] += dt * f_spring[i] / ms.m[i];
 
-                ms.v[i] += dt * f_damping[i];
+                ms.v[i] += dt * f_damping[i] / ms.m[i];
 
+                // Small drag damping for air resistance
+                TV dragDampingForce = - 0.05 * ms.v[i];
 
-                // Drag damping
-                ms.v[i] *= 0.99999;
+                ms.v[i] += dt * dragDampingForce / ms.m[i];
 
 
                 ms.x[i] += ms.v[i] * dt;

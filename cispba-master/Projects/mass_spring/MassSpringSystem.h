@@ -60,17 +60,17 @@ public:
 
         for(int i = 0; i < segments.size(); i++)
         {
-            TV x_ij = x[segments[i][0]] - x[segments[i][1]];
+            TV springVec = x[segments[i][0]] - x[segments[i][1]];
 
-            TV d = x_ij.normalized();
+            TV springVecDir = springVec.normalized();
 
-            T v_rel = (v[segments[i][0]] - v[segments[i][1]]).dot(d);
+            T vRelative = (v[segments[i][0]] - v[segments[i][1]]).dot(springVecDir);
 
-            T f_Scalar = -1 * damping_coeff * v_rel;
+            T fScalar = -1 * damping_coeff * vRelative;
 
-            f[segments[i][0]] += f_Scalar * d;
+            f[segments[i][0]] += fScalar * springVecDir;
 
-            f[segments[i][1]] += -1.0 * f_Scalar * d;
+            f[segments[i][1]] += -1.0 * fScalar * springVecDir;
         }
 
 
