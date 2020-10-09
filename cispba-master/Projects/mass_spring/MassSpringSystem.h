@@ -33,15 +33,17 @@ public:
 
         for(int i = 0; i < segments.size(); i++)
         {
-            TV x_ij = x[segments[i][0]] - x[segments[i][1]];
+            TV springVec = x[segments[i][0]] - x[segments[i][1]];
 
-            TV d = x_ij.normalized();
+            TV springVecDir = springVec.normalized();
 
-            T f_Scalar = -1 * youngs_modulus * (x_ij.norm() / rest_length[i] - 1.0);
+            T springVecLength = springVec.norm();
 
-            f[segments[i][0]] += f_Scalar * d;
+            T forceAmount = -1 * youngs_modulus * (springVecLength / rest_length[i] - 1.0);
 
-            f[segments[i][1]] += -1.0 * f_Scalar * d;
+            f[segments[i][0]] += forceAmount * springVecDir;
+
+            f[segments[i][1]] += -1.0 * forceAmount * springVecDir;
         }
 
 

@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
     SimulationDriver<T,dim> driver;
 
     // set up mass spring system
-    T youngs_modulus = 1000000.0;
+    T youngs_modulus = 100000.0;
     T damping_coeff = 0.1;
     T dt = 0.0001;
 
@@ -68,9 +68,12 @@ int main(int argc, char* argv[])
         {
             for(int c = 0; c < clothWidthIndices; c++) {
 
+                /*
                 std::cout << pointNumber << ": " <<
                     position[0] << "," << position[1] << "," << position[2]
                     << std::endl;
+                */
+
                 pointNumber++;
 
 
@@ -93,25 +96,53 @@ int main(int argc, char* argv[])
         {
             for(c = 0; c < clothWidthIndices - 1; c++)
             {
+                //Horizontal Structural Springs
                 segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, r * clothHeightIndices + c + 1));
+
+                //Vertical Structural Springs
                 segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c));
+
+                // Right Shear Springs
                 segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c + 1));
 
                 if(c != 0)
                 {
+                    // Left Shear Springs
                     segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c - 1));
                 }
+                if(c < clothWidthIndices - 2)
+                {
+                    // Horizontal Flexion Springs
+                    segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, r * clothHeightIndices + c + 2));
+                }
+                if(r < clothHeightIndices - 2)
+                {
+                    // Vertical Flexion Springs
+                    segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 2) * clothHeightIndices + c));
+                }
             }
+            // Vertical Structural Springs
             segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c));
+            // Left Shear Springs
             segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c - 1));
-
+            if(r < clothHeightIndices - 2)
+            {
+                // Vertical Flexion Springs
+                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 2) * clothHeightIndices + c));
+            }
         }
 
-        for(c = 0; c < clothWidthIndices - 1; c++)
+        for(c = 0; c < clothWidthIndices - 2; c++)
         {
+            // Horizontal Structural Springs
             segments.push_back(Eigen::Matrix<int,2,1>(c + clothHeightIndices * (clothHeightIndices - 1),
                      clothHeightIndices * (clothHeightIndices - 1) + c + 1));
+            // Horizontal Flexion Springs
+            segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, r * clothHeightIndices + c + 2));
         }
+        // Horizontal Structural Springs
+        segments.push_back(Eigen::Matrix<int,2,1>(c + clothHeightIndices * (clothHeightIndices - 1),
+                                                  clothHeightIndices * (clothHeightIndices - 1) + c + 1));
 
 
         for(Eigen::Matrix<int,2,1> seg : segments)
@@ -120,8 +151,8 @@ int main(int argc, char* argv[])
             rest_length.push_back(vec.norm());
         }
 
-        node_is_fixed[0] = true;
-        node_is_fixed[99] = true;
+        node_is_fixed[101] = true;
+        node_is_fixed[198] = true;
 
         driver.helper = [&](T t, T dt){
             // TODO
@@ -164,6 +195,7 @@ int main(int argc, char* argv[])
     driver.ms.node_is_fixed = node_is_fixed;
     driver.ms.rest_length = rest_length;
 
+    // Orignal frame #s: 120
     driver.run(120);
 
     std::cout << "Done" << std::endl;
