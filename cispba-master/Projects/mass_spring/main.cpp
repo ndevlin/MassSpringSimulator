@@ -23,9 +23,9 @@ int main(int argc, char* argv[])
     SimulationDriver<T,dim> driver;
 
     // set up mass spring system
-    T youngs_modulus = 10000.0;
-    T damping_coeff = 0.2;
-    T dt = 0.00001;
+    T youngs_modulus = 1000000.0;
+    T damping_coeff = 0.1;
+    T dt = 0.0001;
 
     // node data
     std::vector<T> m;
@@ -56,8 +56,8 @@ int main(int argc, char* argv[])
 
         int pointNumber = 1;
 
-        int clothWidthIndices = 10;
-        int clothHeightIndices = 10;
+        int clothWidthIndices = 100;
+        int clothHeightIndices = 100;
 
         T clothWidth = 2.0;
         T clothHeight = 2.0;
@@ -95,15 +95,15 @@ int main(int argc, char* argv[])
             {
                 segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, r * clothHeightIndices + c + 1));
                 segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c));
-                //segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c + 1));
+                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c + 1));
 
                 if(c != 0)
                 {
-                    //segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c - 1));
+                    segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c - 1));
                 }
             }
             segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c));
-            //segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c - 1));
+            segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c - 1));
 
         }
 
@@ -121,7 +121,7 @@ int main(int argc, char* argv[])
         }
 
         node_is_fixed[0] = true;
-        node_is_fixed[node_is_fixed.size() - 1] = true;
+        node_is_fixed[99] = true;
 
         driver.helper = [&](T t, T dt){
             // TODO

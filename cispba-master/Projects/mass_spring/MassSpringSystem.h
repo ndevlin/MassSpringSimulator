@@ -50,6 +50,29 @@ public:
     void evaluateDampingForces(std::vector<TV >& f)
     {
         // TODO: evaluate damping force
+
+        for(int i = 0; i < x.size(); i++)
+        {
+            f.push_back(TV(0.0, 0.0, 0.0));
+        }
+
+        for(int i = 0; i < segments.size(); i++)
+        {
+            TV x_ij = x[segments[i][0]] - x[segments[i][1]];
+
+            TV d = x_ij.normalized();
+
+            T v_rel = (v[segments[i][0]] - v[segments[i][1]]).dot(d);
+
+            T f_Scalar = -1 * damping_coeff * v_rel;
+
+            f[segments[i][0]] += f_Scalar * d;
+
+            f[segments[i][1]] += -1.0 * f_Scalar * d;
+        }
+
+
+
     }
 
     void dumpPoly(std::string filename)
