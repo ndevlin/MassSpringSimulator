@@ -60,6 +60,7 @@ public:
 
         for(int i = 0; i < segments.size(); i++)
         {
+            // Dashpot damping
             TV springVec = x[segments[i][0]] - x[segments[i][1]];
 
             TV springVecDir = springVec.normalized();
@@ -68,14 +69,18 @@ public:
 
             T fScalar = -1 * damping_coeff * vRelative;
 
+            //Dashpot Damping
             f[segments[i][0]] += fScalar * springVecDir;
-
             f[segments[i][1]] += -1.0 * fScalar * springVecDir;
+
+            //Small Drag Damping for Air resistance
+            T dragDampingCoef = 0.005;
+            f[segments[i][0]] += - dragDampingCoef * v[segments[i][0]];
+            f[segments[i][1]] += - dragDampingCoef * v[segments[i][1]];
         }
 
-
-
     }
+
 
     void dumpPoly(std::string filename)
     {

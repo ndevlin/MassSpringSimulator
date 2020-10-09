@@ -39,12 +39,15 @@ public:
         for(int frame=1; frame<=max_frame; frame++) {
             std::cout << "Frame " << frame << std::endl;
             int N_substeps = (int)(((T)1/24)/dt);
+
             for (int step = 1; step <= N_substeps; step++) {
-                std::cout << "Step " << step << std::endl;
+                //std::cout << "Step " << step << std::endl;
                 helper(accumulate_t, dt);
                 advanceOneStepExplicitIntegration();
                 accumulate_t += dt;
             }
+            std::cout << std::endl;
+
             mkdir("output/", 0777);
             std::string output_folder = "output/" + test;
             mkdir(output_folder.c_str(), 0777);
@@ -72,12 +75,6 @@ public:
                 ms.v[i] += dt * f_spring[i] / ms.m[i];
 
                 ms.v[i] += dt * f_damping[i] / ms.m[i];
-
-                // Small drag damping for air resistance
-                TV dragDampingForce = - 0.05 * ms.v[i];
-
-                ms.v[i] += dt * dragDampingForce / ms.m[i];
-
 
                 ms.x[i] += ms.v[i] * dt;
             }

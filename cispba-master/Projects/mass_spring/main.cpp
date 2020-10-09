@@ -16,7 +16,7 @@ int main(int argc, char* argv[])
 
     std::cout << "Starting" << std::endl;
 
-    using T = float;
+    using T = double;
     constexpr int dim = 3;
     using TV = Eigen::Matrix<T,dim,1>;
 
@@ -24,9 +24,9 @@ int main(int argc, char* argv[])
 
     // set up mass spring system
     T youngs_modulus = 100000.0;
-    T damping_coeff = 0.5;
-    // Working well at 0.0001; Setting at 0.000001 overnight
-    T dt = 0.000001;
+    T damping_coeff = 0.1;
+    // Working well at 0.0001;
+    T dt = 0.0001;
 
     // node data
     std::vector<T> m;
