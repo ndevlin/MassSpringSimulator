@@ -57,8 +57,8 @@ int main(int argc, char* argv[])
 
         int pointNumber = 1;
 
-        int clothWidthIndices = 10;
-        int clothHeightIndices = 10;
+        int clothWidthIndices = 100;
+        int clothHeightIndices = 100;
 
         T clothWidth = 2.0;
         T clothHeight = 2.0;
@@ -152,14 +152,14 @@ int main(int argc, char* argv[])
             rest_length.push_back(vec.norm());
         }
 
-        int fixedPt1 = 0;//101;
-        int fixedPt2 = 9;//198;
+        int fixedPt1 = 101;
+        int fixedPt2 = 198;
 
         node_is_fixed[fixedPt1] = true;
         node_is_fixed[fixedPt2] = true;
 
-        std::cout<< "x[0]: " << x[0][0] << ", " << x[0][1] << ", " <<  x[0][2] << std::endl;
-        std::cout<< "x[9]: " << x[9][0] << ", " << x[9][1] << ", " <<  x[9][2] << std::endl;
+        //std::cout<< "x[0]: " << x[0][0] << ", " << x[0][1] << ", " <<  x[0][2] << std::endl;
+        //std::cout<< "x[9]: " << x[9][0] << ", " << x[9][1] << ", " <<  x[9][2] << std::endl;
 
 
 
@@ -167,11 +167,14 @@ int main(int argc, char* argv[])
         {
             // TODO
 
-            driver.ms.x[fixedPt1][2] += t * dt * -2.0;
-            driver.ms.x[fixedPt2][2] += t * dt * -2.0;
+            //driver.ms.x[fixedPt1][2] += t * dt * -2.0;
+            //driver.ms.x[fixedPt2][2] += t * dt * -2.0;
 
-            //v[fixedPt1][2] = t * -2.0;
-            //v[fixedPt2][2] = t * -2.0;
+            v[fixedPt1][2] = 5 * cos(5 * t);
+            v[fixedPt2][2] = 5 * cos(5 * t);
+
+            driver.ms.x[fixedPt1][2] += v[fixedPt1][2] * dt;
+            driver.ms.x[fixedPt2][2] += v[fixedPt2][2] * dt;
 
         };
         driver.test="cloth";
