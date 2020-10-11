@@ -26,7 +26,7 @@ int main(int argc, char* argv[])
     T youngs_modulus = 100000.0;
     T damping_coeff = 0.1;
     // Working well at 0.0001;
-    T dt = 0.0001;
+    T dt = 0.000001;
 
     // node data
     std::vector<T> m;
@@ -57,8 +57,8 @@ int main(int argc, char* argv[])
 
         int pointNumber = 1;
 
-        int clothWidthIndices = 100;
-        int clothHeightIndices = 100;
+        int clothWidthIndices = 256;
+        int clothHeightIndices = 256;
 
         T clothWidth = 2.0;
         T clothHeight = 2.0;
@@ -152,8 +152,8 @@ int main(int argc, char* argv[])
             rest_length.push_back(vec.norm());
         }
 
-        int fixedPt1 = 101;
-        int fixedPt2 = 198;
+        int fixedPt1 = 257;
+        int fixedPt2 = 510;
 
         node_is_fixed[fixedPt1] = true;
         node_is_fixed[fixedPt2] = true;
