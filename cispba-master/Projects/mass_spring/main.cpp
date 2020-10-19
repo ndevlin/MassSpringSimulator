@@ -23,10 +23,10 @@ int main(int argc, char* argv[])
     SimulationDriver<T,dim> driver;
 
     // set up mass spring system
-    T youngs_modulus = 100000.0;
+    T youngs_modulus = 10000.0;
     T damping_coeff = 0.1;
     // Working well at 0.0001;
-    T dt = 0.000001;
+    T dt = 0.0001;
 
     // node data
     std::vector<T> m;
@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
     std::vector<Eigen::Matrix<int,2,1> > segments;
     std::vector<T> rest_length;
 
-    if (argc < 2) 
+    if (argc < 2)
     {
         std::cout << "Please indicate test case number: 0 (cloth) or 1 (volumetric bunny)" << std::endl;
         exit(0);
@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
     if (strcmp(argv[1], "0") == 0) // cloth case
     {
         // TODO
-        /* 
+        /*
             1. Create node data: position, mass, velocity
             2. Fill segments and rest_length, including struct springs, shearing springs and bending springs.
             3. Choose proper youngs_modulus, damping_coeff and dt.
@@ -57,8 +57,8 @@ int main(int argc, char* argv[])
 
         int pointNumber = 1;
 
-        int clothWidthIndices = 256;
-        int clothHeightIndices = 256;
+        int clothWidthIndices = 100;
+        int clothHeightIndices = 100;
 
         T clothWidth = 2.0;
         T clothHeight = 2.0;
@@ -69,11 +69,11 @@ int main(int argc, char* argv[])
         {
             for(int c = 0; c < clothWidthIndices; c++) {
 
-
+                /*
                 std::cout << pointNumber << ": " <<
-                    position[0] << "," << position[1] << "," << position[2]
-                    << std::endl;
-
+                          position[0] << "," << position[1] << "," << position[2]
+                          << std::endl;
+                */
 
                 pointNumber++;
 
@@ -137,7 +137,7 @@ int main(int argc, char* argv[])
         {
             // Horizontal Structural Springs
             segments.push_back(Eigen::Matrix<int,2,1>(c + clothHeightIndices * (clothHeightIndices - 1),
-                     clothHeightIndices * (clothHeightIndices - 1) + c + 1));
+                                                      clothHeightIndices * (clothHeightIndices - 1) + c + 1));
             // Horizontal Flexion Springs
             segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, r * clothHeightIndices + c + 2));
         }
@@ -152,8 +152,8 @@ int main(int argc, char* argv[])
             rest_length.push_back(vec.norm());
         }
 
-        int fixedPt1 = 257;
-        int fixedPt2 = 510;
+        int fixedPt1 = 101;
+        int fixedPt2 = 198;
 
         node_is_fixed[fixedPt1] = true;
         node_is_fixed[fixedPt2] = true;
@@ -170,8 +170,24 @@ int main(int argc, char* argv[])
             //driver.ms.x[fixedPt1][2] += t * dt * -2.0;
             //driver.ms.x[fixedPt2][2] += t * dt * -2.0;
 
-            v[fixedPt1][2] = 5 * cos(5 * t);
-            v[fixedPt2][2] = 5 * cos(5 * t);
+
+            if(t < 2.3)
+            {
+                v[fixedPt1][2] = 4 * cos(2 * t);
+                v[fixedPt2][2] = 4 * cos(2 * t);
+            }
+            else
+            {
+                v[fixedPt1][2] = 0;
+                v[fixedPt2][2] = 0;
+                v[fixedPt1][0] = -0.8 * cos(2 * t);
+                v[fixedPt2][0] = 0.8 * cos(2 * t);
+            }
+
+
+
+            driver.ms.x[fixedPt1][0] += v[fixedPt1][0] * dt;
+            driver.ms.x[fixedPt2][0] += v[fixedPt2][0] * dt;
 
             driver.ms.x[fixedPt1][2] += v[fixedPt1][2] * dt;
             driver.ms.x[fixedPt2][2] += v[fixedPt2][2] * dt;
@@ -181,12 +197,12 @@ int main(int argc, char* argv[])
     }
 
     else if (strcmp(argv[1], "1") == 0) // volumetric bunny case
-    { 
+    {
         // TODO
-        /* 
-            1. Create node data from data/points: The first line indicates the number of points and dimension (which is 3). 
-            2. Fill segments and rest_length from data/cells: The first line indicates the number of tetrahedra and the number of vertices of each tet (which is 6). Each edge in this tetrahedral mesh will be a segment. Be careful not to create duplicate edges. 
-            3. Choose proper youngs_modulus, damping_coeff, dt; 
+        /*
+            1. Create node data from data/points: The first line indicates the number of points and dimension (which is 3).
+            2. Fill segments and rest_length from data/cells: The first line indicates the number of tetrahedra and the number of vertices of each tet (which is 6). Each edge in this tetrahedral mesh will be a segment. Be careful not to create duplicate edges.
+            3. Choose proper youngs_modulus, damping_coeff, dt;
             4. Set boundary condition (node_is_fixed) and helper function (to achieve moving boundary condition).
         */
 
@@ -202,7 +218,7 @@ int main(int argc, char* argv[])
     }
 
     // simulate
-    
+
     driver.dt = dt;
     driver.ms.segments = segments;
     driver.ms.m = m;
