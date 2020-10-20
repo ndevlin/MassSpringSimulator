@@ -196,6 +196,7 @@ int main(int argc, char* argv[])
         driver.test="cloth";
     }
 
+
     else if (strcmp(argv[1], "1") == 0) // volumetric bunny case
     {
         // TODO
@@ -205,6 +206,86 @@ int main(int argc, char* argv[])
             3. Choose proper youngs_modulus, damping_coeff, dt;
             4. Set boundary condition (node_is_fixed) and helper function (to achieve moving boundary condition).
         */
+
+
+        /*
+        //Horizontal Structural Springs
+        segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, r * clothHeightIndices + c + 1));
+
+        //Vertical Structural Springs
+        segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c));
+        */
+
+
+
+        std::ifstream bunnyObj ("data/bunny.obj");
+
+        if(bunnyObj.is_open())
+        {
+            std::cout << "File successfully opened." << std::endl;
+        }
+        else
+        {
+            std::cout << "File failed to open." << std::endl;
+        }
+
+        std::string line;
+
+        int pointNumber = 1;
+
+        while(std::getline(bunnyObj, line))
+        {
+            if(line == "" || line[0] == ' ' || line[0] == '#')
+            {
+                continue;
+            }
+
+            std::vector<std::string> splitLine;
+
+            std::stringstream tokenize(line);
+
+            std::string intermediate;
+
+            while(std::getline(tokenize, intermediate, ' '))
+            {
+                splitLine.push_back(intermediate);
+            }
+
+            if(splitLine[0][0] == 'v')
+            {
+                T xPos = (T)std::stod(splitLine[1]);
+                T yPos = (T)std::stod(splitLine[2]);
+                T zPos = (T)std::stod(splitLine[3]);
+
+                TV position = TV(xPos, yPos, zPos);
+
+                x.push_back(position);
+                node_is_fixed.push_back(false);
+                m.push_back(0.1);
+                v.push_back(TV(0.0, 0.0, 0.0));
+
+                pointNumber++;
+            }
+        }
+
+        bunnyObj.close();
+
+
+        for(Eigen::Matrix<int,2,1> seg : segments)
+        {
+            TV vec = x[seg[0]] - x[seg[1]];
+            rest_length.push_back(vec.norm());
+        }
+
+        int fixedPt1 = 2140;
+        int fixedPt2 = 2346;
+        int fixedPt3 = 1036;
+
+        node_is_fixed[fixedPt1] = true;
+        node_is_fixed[fixedPt2] = true;
+        node_is_fixed[fixedPt3] = true;
+
+
 
         driver.helper = [&](T t, T dt) {
             // TODO
