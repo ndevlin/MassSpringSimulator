@@ -36,17 +36,19 @@ public:
         mkdir(output_folder.c_str(), 0777);
         std::string filename = output_folder + "/" + std::to_string(0) + ".poly";
         ms.dumpPoly(filename);
+
+        int N_substeps = (int)(((T)1/24.0)/dt) + 1;
+        std::cout << "Num steps: " << N_substeps << std::endl;
+
         for(int frame=1; frame<=max_frame; frame++) {
             std::cout << "Frame " << frame << std::endl;
-            int N_substeps = (int)(((T)1/24)/dt);
 
             int count = 1;
-            int tenPercent = (int)(N_substeps / 10.0);
+            int tenPercent = (int)((T)N_substeps / 10.0);
 
             for (int step = 1; step <= N_substeps; step++) {
                 //std::cout << "Step " << step << std::endl;
                 helper(accumulate_t, dt);
-
 
                 if(step > tenPercent)
                 {
@@ -54,7 +56,6 @@ public:
                     tenPercent += tenPercent;
                     count++;
                 }
-
 
                 advanceOneStepExplicitIntegration();
                 accumulate_t += dt;
@@ -82,12 +83,14 @@ public:
         {
             if(ms.node_is_fixed[i] != true)
             {
+                T mass = ms.m[i];
+
                 // Add gravitational force
-                ms.v[i] += gravity / ms.m[i] * dt;
+                ms.v[i] += gravity / mass * dt;
 
-                ms.v[i] += dt * f_spring[i] / ms.m[i];
+                ms.v[i] += dt * f_spring[i] / mass;
 
-                ms.v[i] += dt * f_damping[i] / ms.m[i];
+                ms.v[i] += dt * f_damping[i] / mass;
 
                 ms.x[i] += ms.v[i] * dt;
             }
