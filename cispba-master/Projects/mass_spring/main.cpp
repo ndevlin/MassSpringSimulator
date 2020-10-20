@@ -217,7 +217,8 @@ int main(int argc, char* argv[])
         */
 
 
-
+        // Open obj
+        /*
         std::ifstream bunnyObj ("data/bunny.obj");
 
         if(bunnyObj.is_open())
@@ -267,8 +268,93 @@ int main(int argc, char* argv[])
                 pointNumber++;
             }
         }
-
         bunnyObj.close();
+        */
+
+
+
+
+
+        // Open points
+
+        std::ifstream pointsFile ("data/points");
+
+        if(pointsFile.is_open())
+        {
+            std::cout << "File successfully opened." << std::endl;
+        }
+        else
+        {
+            std::cout << "File failed to open." << std::endl;
+        }
+
+        std::string line = "";
+
+        int pointNumber = 1;
+
+        bool hasRun = false;
+
+        int numPoints = 0;
+
+        std::getline(pointsFile, line);
+
+        do
+        {
+            std::vector<std::string> splitLine;
+
+            std::string buffer = "";
+
+            std::stringstream sStream(line);
+
+            while(sStream >> buffer)
+            {
+                splitLine.push_back(buffer);
+            }
+
+            if(!hasRun)
+            {
+                numPoints = std::stoi(splitLine[0]);
+                std::cout << "Number of points: " << numPoints << std::endl;
+
+                if(std::stoi(splitLine[1]) != 3)
+                {
+                    std::cout << "Error: Improper points file" << std::endl;
+                    break;
+                }
+
+                hasRun = true;
+                continue;
+            }
+
+            T xPos = (T)std::stod(splitLine[0]);
+            T yPos = (T)std::stod(splitLine[1]);
+            T zPos = (T)std::stod(splitLine[2]);
+
+            TV position = TV(xPos, yPos, zPos);
+
+            x.push_back(position);
+            node_is_fixed.push_back(false);
+            m.push_back(0.1);
+            v.push_back(TV(0.0, 0.0, 0.0));
+
+            std::cout << pointNumber << ": " << position[0] << ", " << position[1] << ", " << position[2] << std::endl;
+
+
+            pointNumber++;
+
+        } while(std::getline(pointsFile, line));
+
+        pointsFile.close();
+
+
+
+
+
+
+
+
+
+
 
 
         for(Eigen::Matrix<int,2,1> seg : segments)
