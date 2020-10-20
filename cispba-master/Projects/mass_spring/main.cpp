@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
     T youngs_modulus = 1000;
     T damping_coeff = 0.2;
     // Working well at 0.0001;
-    T dt = 0.000001;
+    T dt = 0.0001;
 
     // node data
     std::vector<T> m;
@@ -172,11 +172,13 @@ int main(int argc, char* argv[])
 
             if(t < 2.3)
             {
+                // Should be driver.ms.v
                 v[fixedPt1][2] = 4 * cos(2 * t);
                 v[fixedPt2][2] = 4 * cos(2 * t);
             }
             else
             {
+                // Should be driver.ms.v
                 v[fixedPt1][2] = 0;
                 v[fixedPt2][2] = 0;
                 v[fixedPt1][0] = -0.8 * cos(2 * t);
@@ -471,8 +473,21 @@ int main(int argc, char* argv[])
 
 
 
-        driver.helper = [&](T t, T dt) {
+        driver.helper = [&](T t, T dt)
+        {
             // TODO
+
+            if(t < 1.1)
+            {
+                driver.ms.v[tail][0] = 0.5 * cos(1 * t);
+
+                driver.ms.x[tail][0] += driver.ms.v[tail][0] * dt;
+            }
+            else
+            {
+                driver.ms.node_is_fixed[tail] = false;
+            }
+
         };
         driver.test="bunny";
     }
