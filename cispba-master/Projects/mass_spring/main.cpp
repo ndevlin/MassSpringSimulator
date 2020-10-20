@@ -25,7 +25,7 @@ int main(int argc, char* argv[])
     T youngs_modulus = 1000;
     T damping_coeff = 0.2;
     // Working well at 0.0001;
-    T dt = 0.00001;
+    T dt = 0.000001;
 
     // node data
     std::vector<T> m;
@@ -495,7 +495,7 @@ int main(int argc, char* argv[])
     driver.ms.rest_length = rest_length;
 
     // Orignal frame #s: 120
-    driver.run(10);
+    driver.run(120);
 
     std::cout << "Done" << std::endl;
 
