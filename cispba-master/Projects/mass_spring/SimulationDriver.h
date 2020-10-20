@@ -40,21 +40,21 @@ public:
             std::cout << "Frame " << frame << std::endl;
             int N_substeps = (int)(((T)1/24)/dt);
 
-            //int count = 1;
-            //int tenPercent = (int)(N_substeps / 10.0);
+            int count = 1;
+            int tenPercent = (int)(N_substeps / 10.0);
 
             for (int step = 1; step <= N_substeps; step++) {
                 //std::cout << "Step " << step << std::endl;
                 helper(accumulate_t, dt);
 
-                /*
+
                 if(step > tenPercent)
                 {
                     std::cout << count * 2 << "0% " << std::endl;
                     tenPercent += tenPercent;
                     count++;
                 }
-                */
+
 
                 advanceOneStepExplicitIntegration();
                 accumulate_t += dt;

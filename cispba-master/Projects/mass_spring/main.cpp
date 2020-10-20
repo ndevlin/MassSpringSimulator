@@ -13,7 +13,6 @@
 
 int main(int argc, char* argv[])
 {
-
     std::cout << "Starting" << std::endl;
 
     using T = double;
@@ -23,10 +22,10 @@ int main(int argc, char* argv[])
     SimulationDriver<T,dim> driver;
 
     // set up mass spring system
-    T youngs_modulus = 10000.0;
-    T damping_coeff = 0.1;
+    T youngs_modulus = 1000;
+    T damping_coeff = 0.2;
     // Working well at 0.0001;
-    T dt = 0.0001;
+    T dt = 0.00001;
 
     // node data
     std::vector<T> m;
@@ -208,13 +207,6 @@ int main(int argc, char* argv[])
         */
 
 
-        /*
-        //Horizontal Structural Springs
-        segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, r * clothHeightIndices + c + 1));
-
-        //Vertical Structural Springs
-        segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c));
-        */
 
 
         // Open obj
@@ -337,7 +329,7 @@ int main(int argc, char* argv[])
             m.push_back(0.1);
             v.push_back(TV(0.0, 0.0, 0.0));
 
-            std::cout << pointNumber << ": " << position[0] << ", " << position[1] << ", " << position[2] << std::endl;
+            //std::cout << pointNumber << ": " << position[0] << ", " << position[1] << ", " << position[2] << std::endl;
 
 
             pointNumber++;
@@ -348,28 +340,134 @@ int main(int argc, char* argv[])
 
 
 
+        struct pairHash
+        {
+            std::size_t operator()(const std::pair<int,int> & p) const
+            {
+                return p.first * 31 + p.second;
+            }
+        };
+
+        std::unordered_set<std::pair<int, int>, pairHash> springs;
+
+
+        // Open cells file
+
+        std::ifstream cellsFile ("data/cells");
+
+        if(cellsFile.is_open())
+        {
+            std::cout << "File successfully opened." << std::endl;
+        }
+        else
+        {
+            std::cout << "File failed to open." << std::endl;
+        }
+
+        line = "";
+
+        int tetNumber = 1;
+
+        hasRun = false;
+
+        int numTets = 0;
+
+        std::getline(cellsFile, line);
+
+        do
+        {
+            std::vector<std::string> splitLine;
+
+            std::string buffer = "";
+
+            std::stringstream sStream(line);
+
+            while(sStream >> buffer)
+            {
+                splitLine.push_back(buffer);
+            }
+
+            if(!hasRun)
+            {
+                numTets = std::stoi(splitLine[0]);
+                std::cout << "Number of tets: " << numTets << std::endl;
+
+                if(std::stoi(splitLine[1]) != 4)
+                {
+                    std::cout << "Error: Improper tets file" << std::endl;
+                    break;
+                }
+
+                hasRun = true;
+                continue;
+            }
+
+            std::cout << splitLine[0] << " " << splitLine[1] << " " << splitLine[2] << " " <<splitLine[3] << std::endl;
+
+            int pt1 = std::stoi(splitLine[0]);
+            int pt2 = std::stoi(splitLine[1]);
+            int pt3 = std::stoi(splitLine[2]);
+            int pt4 = std::stoi(splitLine[3]);
+
+            /*
+            std::cout << pt1[0] << ", " << pt1[1] << ", " << pt1[2] << std::endl;
+            std::cout << pt2[0] << ", " << pt2[1] << ", " << pt2[2] << std::endl;
+            std::cout << pt3[0] << ", " << pt3[1] << ", " << pt3[2] << std::endl;
+            std::cout << pt4[0] << ", " << pt4[1] << ", " << pt4[2] << std::endl;
+            */
+
+            // Add Spring
+            springs.insert(std::pair<int, int>(pt1, pt2));
+            springs.insert(std::pair<int, int>(pt1, pt3));
+            springs.insert(std::pair<int, int>(pt1, pt4));
+            springs.insert(std::pair<int, int>(pt2, pt3));
+            springs.insert(std::pair<int, int>(pt2, pt4));
+            springs.insert(std::pair<int, int>(pt3, pt4));
 
 
 
 
+            /*
+            segments.push_back(Eigen::Matrix<int,2,1>(pt1, pt2));
+            segments.push_back(Eigen::Matrix<int,2,1>(pt1, pt3));
+            segments.push_back(Eigen::Matrix<int,2,1>(pt1, pt4));
+            segments.push_back(Eigen::Matrix<int,2,1>(pt2, pt3));
+            segments.push_back(Eigen::Matrix<int,2,1>(pt2, pt4));
+            segments.push_back(Eigen::Matrix<int,2,1>(pt3, pt4));
+             */
 
 
+            tetNumber++;
+
+        } while(std::getline(cellsFile, line));
+
+        cellsFile.close();
 
 
+        for(std::pair<int, int> p : springs)
+        {
+            Eigen::Matrix<int,2,1> seg = Eigen::Matrix<int,2,1>(p.first, p.second);
+            segments.push_back(seg);
+            TV vec = x[seg[0]] - x[seg[1]];
+            rest_length.push_back(vec.norm());
+        }
 
+        /*
         for(Eigen::Matrix<int,2,1> seg : segments)
         {
             TV vec = x[seg[0]] - x[seg[1]];
             rest_length.push_back(vec.norm());
         }
+         */
 
-        int fixedPt1 = 2140;
-        int fixedPt2 = 2346;
-        int fixedPt3 = 1036;
 
-        node_is_fixed[fixedPt1] = true;
-        node_is_fixed[fixedPt2] = true;
-        node_is_fixed[fixedPt3] = true;
+        int ear1 = 2140;
+        int ear2 = 2346;
+        int tail = 1036;
+
+        node_is_fixed[ear1] = true;
+        node_is_fixed[ear2] = true;
+        node_is_fixed[tail] = true;
 
 
 
@@ -397,7 +495,7 @@ int main(int argc, char* argv[])
     driver.ms.rest_length = rest_length;
 
     // Orignal frame #s: 120
-    driver.run(120);
+    driver.run(10);
 
     std::cout << "Done" << std::endl;
 
