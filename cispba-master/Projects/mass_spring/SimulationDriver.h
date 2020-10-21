@@ -25,7 +25,7 @@ public:
     : dt((T)0.00001) // 0.0015 for implicit
     {
         gravity.setZero();
-        gravity(1) = -9.8;
+        gravity(1) = -9.80665;
     }
 
     void run(const int max_frame)
@@ -87,7 +87,7 @@ public:
             T dtByMass = dt / ms.m[i];
 
             // Add gravitational force
-            TV addedVelocity = gravity * dtByMass;
+            TV addedVelocity = gravity * dt;
 
             addedVelocity += f_spring[i] * dtByMass;
 

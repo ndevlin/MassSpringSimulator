@@ -29,10 +29,10 @@ int main(int argc, char* argv[])
     T damping_coeff = 0.2;
     T dt = 0.000001;
      */
-    T youngs_modulus = 1000;
-    T damping_coeff = 0.5;
-    T dt = 0.00001;
-    T totalMass = 100.0;
+    T youngs_modulus = 10.0;
+    T damping_coeff = 2.0;
+    T dt = 0.0001;
+    T totalMass = 2.0;
 
     // node data
     std::vector<T> m;

@@ -81,7 +81,7 @@ public:
             f[point2] = -1.0 * fScalar * springVecDir;
 
             //Small Drag Damping for Air resistance
-            T dragDampingCoef = 0.01;
+            T dragDampingCoef = 0.0001;
             f[point1] += - dragDampingCoef * pt1Vel;
             f[point2] += - dragDampingCoef * pt2Vel;
         }
