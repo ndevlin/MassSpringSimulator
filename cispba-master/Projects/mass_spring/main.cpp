@@ -36,9 +36,9 @@ int main(int argc, char* argv[])
         T totalMass = 2.0;
      */
 
-    T youngs_modulus = 10.0;
-    T damping_coeff = 2.0;
-    T dt = 0.00001;
+    T youngs_modulus = 15000.0;
+    T damping_coeff = 1.0;
+    T dt = 0.0001;
     T totalMass = 2.0;
 
     // node data
@@ -165,8 +165,8 @@ int main(int argc, char* argv[])
             rest_length.push_back(vec.norm());
         }
 
-        int fixedPt1 = 101;
-        int fixedPt2 = 198;
+        int fixedPt1 = 0;
+        int fixedPt2 = 99;
 
         node_is_fixed[fixedPt1] = true;
         node_is_fixed[fixedPt2] = true;
@@ -185,13 +185,13 @@ int main(int argc, char* argv[])
 
             if(t < 2.3)
             {
-                T displace = 4 * cos(2 * t);
+                T displace = -4 * cos(2 * t);
                 pt1Vel[2] = displace;
                 pt2Vel[2] = displace;
             }
             else
             {
-                T displace = 0.8 * cos(2 * t);
+                T displace = 0.5 * cos(2 * t);
 
                 pt1Vel[0] = -1 * displace;
                 pt2Vel[0] = displace;

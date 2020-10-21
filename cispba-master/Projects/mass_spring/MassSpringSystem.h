@@ -16,11 +16,14 @@ public:
     std::vector<TV> v;
     T youngs_modulus;
     T damping_coeff;
+    TV gravity;
     std::vector<bool> node_is_fixed;
     std::vector<T> rest_length;
 
     MassSpringSystem()
-    {}
+    {
+        gravity = TV(0.0, -9.80665, 0.0);
+    }
 
     void evaluateSpringForces(std::vector<TV >& f)
     {
@@ -28,7 +31,8 @@ public:
 
         for(int i = 0; i < x.size(); i++)
         {
-            f.push_back(TV(0.0, 0.0, 0.0));
+            // Add gravitational force
+            f.push_back(gravity);
         }
 
         for(int i = 0; i < segments.size(); i++)
@@ -81,7 +85,7 @@ public:
             f[point2] = -1.0 * fScalar * springVecDir;
 
             //Small Drag Damping for Air resistance
-            T dragDampingCoef = 0.0001;
+            T dragDampingCoef = 0.001;
             f[point1] += - dragDampingCoef * pt1Vel;
             f[point2] += - dragDampingCoef * pt2Vel;
         }

@@ -86,10 +86,7 @@ public:
 
             T dtByMass = dt / ms.m[i];
 
-            // Add gravitational force
-            TV addedVelocity = gravity * dt;
-
-            addedVelocity += f_spring[i] * dtByMass;
+            TV addedVelocity = f_spring[i] * dtByMass;
 
             addedVelocity += f_damping[i] * dtByMass;
 
