@@ -33,7 +33,10 @@ public:
 
         for(int i = 0; i < segments.size(); i++)
         {
-            TV springVec = x[segments[i][0]] - x[segments[i][1]];
+            int point1 = segments[i][0];
+            int point2 = segments[i][1];
+
+            TV springVec = x[point1] - x[point2];
 
             TV springVecDir = springVec.normalized();
 
@@ -41,9 +44,9 @@ public:
 
             T forceAmount = -1 * youngs_modulus * (springVecLength / rest_length[i] - 1.0);
 
-            f[segments[i][0]] += forceAmount * springVecDir;
+            f[point1] += forceAmount * springVecDir;
 
-            f[segments[i][1]] += -1.0 * forceAmount * springVecDir;
+            f[point2] += -1.0 * forceAmount * springVecDir;
         }
 
 
@@ -60,23 +63,27 @@ public:
 
         for(int i = 0; i < segments.size(); i++)
         {
+            int point1 = segments[i][0];
+            int point2 = segments[i][1];
+
+            TV pt1Vel = v[point1];
+            TV pt2Vel = v[point2];
+
             // Dashpot damping
-            TV springVec = x[segments[i][0]] - x[segments[i][1]];
+            TV springVecDir = (x[point1] - x[point2]).normalized();
 
-            TV springVecDir = springVec.normalized();
-
-            T vRelative = (v[segments[i][0]] - v[segments[i][1]]).dot(springVecDir);
+            T vRelative = (pt1Vel - pt2Vel).dot(springVecDir);
 
             T fScalar = -1 * damping_coeff * vRelative;
 
             //Dashpot Damping
-            f[segments[i][0]] += fScalar * springVecDir;
-            f[segments[i][1]] += -1.0 * fScalar * springVecDir;
+            f[point1] = fScalar * springVecDir;
+            f[point2] = -1.0 * fScalar * springVecDir;
 
             //Small Drag Damping for Air resistance
-            T dragDampingCoef = 0.005;
-            f[segments[i][0]] += - dragDampingCoef * v[segments[i][0]];
-            f[segments[i][1]] += - dragDampingCoef * v[segments[i][1]];
+            T dragDampingCoef = 0.01;
+            f[point1] += - dragDampingCoef * pt1Vel;
+            f[point2] += - dragDampingCoef * pt2Vel;
         }
 
     }

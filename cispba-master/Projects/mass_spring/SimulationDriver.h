@@ -81,19 +81,21 @@ public:
 
         for(int i = 0; i < ms.x.size(); i++)
         {
-            if(ms.node_is_fixed[i] != true)
-            {
-                T mass = ms.m[i];
+            // int version of node_is_fixed to avoid branching
+            T isFree = (T)(int)(!ms.node_is_fixed[i]);
 
-                // Add gravitational force
-                ms.v[i] += gravity / mass * dt;
+            T dtByMass = dt / ms.m[i];
 
-                ms.v[i] += dt * f_spring[i] / mass;
+            // Add gravitational force
+            TV addedVelocity = gravity * dtByMass;
 
-                ms.v[i] += dt * f_damping[i] / mass;
+            addedVelocity += f_spring[i] * dtByMass;
 
-                ms.x[i] += ms.v[i] * dt;
-            }
+            addedVelocity += f_damping[i] * dtByMass;
+
+            ms.x[i] += isFree * (addedVelocity + ms.v[i]) * dt;
+
+            ms.v[i] += isFree * addedVelocity;
         }
 
     }

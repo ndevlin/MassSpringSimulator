@@ -173,34 +173,30 @@ int main(int argc, char* argv[])
         {
             // TODO
 
-            //driver.ms.x[fixedPt1][2] += t * dt * -2.0;
-            //driver.ms.x[fixedPt2][2] += t * dt * -2.0;
-
+            TV pt1Vel = TV(0.0, 0.0, 0.0);
+            TV pt2Vel = TV(0.0, 0.0, 0.0);
 
             if(t < 2.3)
             {
-                // Should be driver.ms.v
-                v[fixedPt1][2] = 4 * cos(2 * t);
-                v[fixedPt2][2] = 4 * cos(2 * t);
+                T displace = 4 * cos(2 * t);
+                pt1Vel[2] = displace;
+                pt2Vel[2] = displace;
             }
             else
             {
-                // Should be driver.ms.v
-                v[fixedPt1][2] = 0;
-                v[fixedPt2][2] = 0;
-                v[fixedPt1][0] = -0.8 * cos(2 * t);
-                v[fixedPt2][0] = 0.8 * cos(2 * t);
+                T displace = 0.8 * cos(2 * t);
+
+                pt1Vel[0] = -1 * displace;
+                pt2Vel[0] = displace;
             }
 
+            driver.ms.x[fixedPt1] += pt1Vel * dt;
+            driver.ms.x[fixedPt2] += pt2Vel * dt;
 
-
-            driver.ms.x[fixedPt1][0] += v[fixedPt1][0] * dt;
-            driver.ms.x[fixedPt2][0] += v[fixedPt2][0] * dt;
-
-            driver.ms.x[fixedPt1][2] += v[fixedPt1][2] * dt;
-            driver.ms.x[fixedPt2][2] += v[fixedPt2][2] * dt;
-
+            driver.ms.v[fixedPt1] = pt1Vel;
+            driver.ms.v[fixedPt2] = pt2Vel;
         };
+
         driver.test="cloth";
     }
 
@@ -340,9 +336,6 @@ int main(int argc, char* argv[])
 
             v.push_back(TV(0.0, 0.0, 0.0));
 
-            //std::cout << pointNumber << ": " << position[0] << ", " << position[1] << ", " << position[2] << std::endl;
-
-
             pointNumber++;
 
         } while(std::getline(pointsFile, line));
@@ -457,9 +450,11 @@ int main(int argc, char* argv[])
 
             if(t < 1.1)
             {
-                driver.ms.v[tail][0] = 0.5 * cos(1 * t);
+                T pointXVel = 0.5 * cos(1 * t);
 
-                driver.ms.x[tail][0] += driver.ms.v[tail][0] * dt;
+                driver.ms.v[tail][0] = pointXVel;
+
+                driver.ms.x[tail][0] += pointXVel * dt;
             }
             else
             {
