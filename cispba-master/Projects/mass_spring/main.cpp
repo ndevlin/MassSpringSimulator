@@ -23,7 +23,7 @@ int main(int argc, char* argv[])
 
     // set up mass spring system
 
-    // Working decently well at;
+    // Bunny Working decently well at;
     /*
     T youngs_modulus = 1000;
     T damping_coeff = 0.2;
@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
 
     T youngs_modulus = 10.0;
     T damping_coeff = 2.0;
-    T dt = 0.0001;
+    T dt = 0.00001;
     T totalMass = 2.0;
 
     // node data
