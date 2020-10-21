@@ -28,7 +28,14 @@ int main(int argc, char* argv[])
     T youngs_modulus = 1000;
     T damping_coeff = 0.2;
     T dt = 0.000001;
+
+     Also at
+      T youngs_modulus = 10.0;
+        T damping_coeff = 2.0;
+        T dt = 0.000001;
+        T totalMass = 2.0;
      */
+
     T youngs_modulus = 10.0;
     T damping_coeff = 2.0;
     T dt = 0.0001;
