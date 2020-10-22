@@ -59,10 +59,10 @@ int main(int argc, char* argv[])
 
         // Set physical values to change visual properties of cloth
         // A large disparity in values usually necessitates a smaller dt time interval
-        youngs_modulus = 5.0;
-        damping_coeff = 0.1;
+        youngs_modulus = 4.0;
+        damping_coeff = 0.0001;
         dt = 0.0001;
-        totalMass = 2.0;
+        totalMass = 1.0;
 
         int clothWidthIndices = 65;
         int clothHeightIndices = 65;
@@ -269,21 +269,12 @@ int main(int argc, char* argv[])
             4. Set boundary condition (node_is_fixed) and helper function (to achieve moving boundary condition).
         */
 
-        /*
-        youngs_modulus = 1000.0;
-        damping_coeff = 2.0;
-        dt = 0.00001;
-        totalMass = 2.0;
-         */
-
+        // Set physical values to change visual properties of bunny
+        // A large disparity in values usually necessitates a smaller dt time interval
         youngs_modulus = 10.0;
         damping_coeff = 2.0;
         dt = 0.00001;
         totalMass = 2.0;
-
-
-
-
 
 
         // Open points file
@@ -440,6 +431,7 @@ int main(int argc, char* argv[])
             rest_length.push_back(vec.norm());
         }
 
+        // Fix handle points
         int ear1 = 2140;
         int ear2 = 2346;
         int tail = 1036;
@@ -448,11 +440,11 @@ int main(int argc, char* argv[])
         node_is_fixed[ear2] = true;
         node_is_fixed[tail] = true;
 
-
         driver.helper = [&](T t, T dt)
         {
             // TODO
 
+            // Pull back tail for 1 second then release
             if(t < 1.1)
             {
                 T pointXVel = 0.5 * cos(1 * t);

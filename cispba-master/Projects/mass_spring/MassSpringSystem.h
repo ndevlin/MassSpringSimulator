@@ -28,12 +28,13 @@ public:
     {
         // TODO: evaluate spring force
 
-        // Initialize f to number of points
+        // Initialize f to size of number of points
         for(int i = 0; i < x.size(); i++)
         {
             f.push_back(TV(0.0, 0.0, 0.0));
         }
 
+        // Calculate spring forces
         for(int i = 0; i < segments.size(); i++)
         {
             int point1 = segments[i][0];
@@ -54,6 +55,7 @@ public:
 
     }
 
+
     void evaluateDampingForces(std::vector<TV >& f)
     {
         // TODO: evaluate damping force
@@ -64,6 +66,7 @@ public:
             f.push_back(TV(0.0, 0.0, 0.0));
         }
 
+        // Calculate damping forces
         for(int i = 0; i < segments.size(); i++)
         {
             int point1 = segments[i][0];
@@ -84,7 +87,7 @@ public:
             f[point2] = -1.0 * fScalar * springVecDir;
 
             //Small Drag Damping for Air resistance
-            T dragDampingCoef = 0.0001;
+            T dragDampingCoef = 0.0005;
             f[point1] += - dragDampingCoef * pt1Vel;
             f[point2] += - dragDampingCoef * pt2Vel;
         }

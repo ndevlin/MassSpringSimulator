@@ -42,10 +42,10 @@ public:
 
         ms.dumpPoly(filename);
 
-        int N_substeps = (int)(( 1.0 / frameRate) / dt) + 1;
+        int N_substeps = (int)((1.0 / frameRate) / dt) + 1;
         std::cout << "Num steps: " << N_substeps << std::endl;
 
-        for(int frame=1; frame<=max_frame; frame++) {
+        for(int frame = 1; frame <= max_frame; frame++) {
             std::cout << "Frame " << frame << std::endl;
 
             int count = 1;
@@ -76,7 +76,8 @@ public:
         }
     }
 
-    void advanceOneStepExplicitIntegration() {
+    void advanceOneStepExplicitIntegration()
+    {
         std::vector<TV> f_spring;
         ms.evaluateSpringForces(f_spring);
         std::vector<TV> f_damping;
