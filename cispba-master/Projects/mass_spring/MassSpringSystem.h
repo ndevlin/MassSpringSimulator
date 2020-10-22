@@ -113,4 +113,61 @@ public:
         fs << "END\n";
         fs.close();
     }
+
+
+    // Function to load in an obj file
+    void openObj(std::string filename)
+    {
+        std::ifstream fileBuffer(filename);
+
+        if (!fileBuffer.is_open())
+        {
+            std::cout << "File failed to open." << std::endl;
+        }
+        else
+        {
+            std::cout << "File successfully opened." << std::endl;
+
+            std::string line;
+
+            int pointNumber = 1;
+
+            while (std::getline(fileBuffer, line))
+            {
+                if (line == "" || line[0] == ' ' || line[0] == '#')
+                {
+                    continue;
+                }
+
+                std::vector<std::string> splitLine;
+
+                std::stringstream tokenize(line);
+
+                std::string intermediate;
+
+                while (std::getline(tokenize, intermediate, ' '))
+                {
+                    splitLine.push_back(intermediate);
+                }
+
+                if (splitLine[0][0] == 'v')
+                {
+                    T xPos = (T) std::stod(splitLine[1]);
+                    T yPos = (T) std::stod(splitLine[2]);
+                    T zPos = (T) std::stod(splitLine[3]);
+
+                    TV position = TV(xPos, yPos, zPos);
+
+                    x.push_back(position);
+                    node_is_fixed.push_back(false);
+                    m.push_back(0.1);
+                    v.push_back(TV(0.0, 0.0, 0.0));
+
+                    pointNumber++;
+                }
+            }
+            fileBuffer.close();
+        }
+    }
+
 };
