@@ -1,3 +1,5 @@
+// Modified by Nathan Devlin for CIS 563 Project 1
+
 #include <Eigen/Core>
 #include <Eigen/Dense>
 
@@ -16,23 +18,20 @@ public:
     std::vector<TV> v;
     T youngs_modulus;
     T damping_coeff;
-    TV gravity;
     std::vector<bool> node_is_fixed;
     std::vector<T> rest_length;
 
     MassSpringSystem()
-    {
-        gravity = TV(0.0, -9.80665, 0.0);
-    }
+    {}
 
     void evaluateSpringForces(std::vector<TV >& f)
     {
         // TODO: evaluate spring force
 
+        // Initialize f to number of points
         for(int i = 0; i < x.size(); i++)
         {
-            // Add gravitational force
-            f.push_back(gravity);
+            f.push_back(TV(0.0, 0.0, 0.0));
         }
 
         for(int i = 0; i < segments.size(); i++)
@@ -53,13 +52,13 @@ public:
             f[point2] += -1.0 * forceAmount * springVecDir;
         }
 
-
     }
 
     void evaluateDampingForces(std::vector<TV >& f)
     {
         // TODO: evaluate damping force
 
+        // Initialize f to number of points
         for(int i = 0; i < x.size(); i++)
         {
             f.push_back(TV(0.0, 0.0, 0.0));
@@ -85,7 +84,7 @@ public:
             f[point2] = -1.0 * fScalar * springVecDir;
 
             //Small Drag Damping for Air resistance
-            T dragDampingCoef = 0.001;
+            T dragDampingCoef = 0.0001;
             f[point1] += - dragDampingCoef * pt1Vel;
             f[point2] += - dragDampingCoef * pt2Vel;
         }

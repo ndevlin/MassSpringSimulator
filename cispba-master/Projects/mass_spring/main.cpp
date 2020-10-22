@@ -1,3 +1,5 @@
+// Modified by Nathan Devlin for CIS 563 Project 1
+
 #include <Eigen/Core>
 #include <Eigen/Dense>
 #include <iostream>
@@ -28,6 +30,7 @@ int main(int argc, char* argv[])
     T youngs_modulus = 1000;
     T damping_coeff = 0.2;
     T dt = 0.000001;
+    T totalMass = 550.0;
 
      Also at
       T youngs_modulus = 10.0;
@@ -36,10 +39,10 @@ int main(int argc, char* argv[])
         T totalMass = 2.0;
      */
 
-    T youngs_modulus = 15000.0;
-    T damping_coeff = 10.0;
-    T dt = 0.000005;
-    T totalMass = 2.0;
+    T youngs_modulus = 1.0;
+    T damping_coeff = 1.0;
+    T dt = 0.00001;
+    T totalMass = 1.0;
 
     // node data
     std::vector<T> m;
@@ -68,10 +71,18 @@ int main(int argc, char* argv[])
             5. Generate quad mesh for rendering.
         */
 
+        youngs_modulus = 15000.0;
+        damping_coeff = 10.0;
+        dt = 0.0001;
+        totalMass = 1000.0;
+
+
         int pointNumber = 1;
 
         int clothWidthIndices = 100;
         int clothHeightIndices = 100;
+
+        T totalPoints = (T)(clothWidthIndices * clothHeightIndices);
 
         T clothWidth = 2.0;
         T clothHeight = 2.0;
@@ -93,7 +104,10 @@ int main(int argc, char* argv[])
 
                 x.push_back(TV(position));
                 node_is_fixed.push_back(false);
-                m.push_back(0.1);
+
+                //
+                m.push_back(totalMass / totalPoints);
+
                 v.push_back(TV(0.0, 0.0, 0.0));
 
                 position[0] += clothWidth / ((T) clothWidthIndices - 1.0);
@@ -111,38 +125,47 @@ int main(int argc, char* argv[])
             for(c = 0; c < clothWidthIndices - 1; c++)
             {
                 //Horizontal Structural Springs
-                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, r * clothHeightIndices + c + 1));
+                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
+                                                          r * clothHeightIndices + c + 1));
 
                 //Vertical Structural Springs
-                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c));
+                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
+                                                          (r + 1) * clothHeightIndices + c));
 
                 // Right Shear Springs
-                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c + 1));
+                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
+                                                          (r + 1) * clothHeightIndices + c + 1));
 
                 if(c != 0)
                 {
                     // Left Shear Springs
-                    segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c - 1));
+                    segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
+                                                              (r + 1) * clothHeightIndices + c - 1));
                 }
                 if(c < clothWidthIndices - 2)
                 {
                     // Horizontal Flexion Springs
-                    segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, r * clothHeightIndices + c + 2));
+                    segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
+                                                              r * clothHeightIndices + c + 2));
                 }
                 if(r < clothHeightIndices - 2)
                 {
                     // Vertical Flexion Springs
-                    segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 2) * clothHeightIndices + c));
+                    segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
+                                                              (r + 2) * clothHeightIndices + c));
                 }
             }
             // Vertical Structural Springs
-            segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c));
+            segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
+                                                      (r + 1) * clothHeightIndices + c));
             // Left Shear Springs
-            segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 1) * clothHeightIndices + c - 1));
+            segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
+                                                      (r + 1) * clothHeightIndices + c - 1));
             if(r < clothHeightIndices - 2)
             {
                 // Vertical Flexion Springs
-                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, (r + 2) * clothHeightIndices + c));
+                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
+                                                          (r + 2) * clothHeightIndices + c));
             }
         }
 
@@ -152,12 +175,12 @@ int main(int argc, char* argv[])
             segments.push_back(Eigen::Matrix<int,2,1>(c + clothHeightIndices * (clothHeightIndices - 1),
                                                       clothHeightIndices * (clothHeightIndices - 1) + c + 1));
             // Horizontal Flexion Springs
-            segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices, r * clothHeightIndices + c + 2));
+            segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
+                                                      r * clothHeightIndices + c + 2));
         }
         // Horizontal Structural Springs
         segments.push_back(Eigen::Matrix<int,2,1>(c + clothHeightIndices * (clothHeightIndices - 1),
                                                   clothHeightIndices * (clothHeightIndices - 1) + c + 1));
-
 
         for(Eigen::Matrix<int,2,1> seg : segments)
         {
@@ -166,14 +189,10 @@ int main(int argc, char* argv[])
         }
 
         int fixedPt1 = 0;
-        int fixedPt2 = 99;
+        int fixedPt2 = clothWidthIndices - 1;
 
         node_is_fixed[fixedPt1] = true;
         node_is_fixed[fixedPt2] = true;
-
-        //std::cout<< "x[0]: " << x[0][0] << ", " << x[0][1] << ", " <<  x[0][2] << std::endl;
-        //std::cout<< "x[9]: " << x[9][0] << ", " << x[9][1] << ", " <<  x[9][2] << std::endl;
-
 
 
         driver.helper = [&](T t, T dt)
@@ -183,6 +202,7 @@ int main(int argc, char* argv[])
             TV pt1Vel = TV(0.0, 0.0, 0.0);
             TV pt2Vel = TV(0.0, 0.0, 0.0);
 
+            // Move handles along z until t = 2.3
             if(t < 2.3)
             {
                 T displace = -4 * cos(2 * t);
@@ -191,11 +211,14 @@ int main(int argc, char* argv[])
             }
             else
             {
+                // Stretch fabric along z afterwards
                 T displace = 0.5 * cos(2 * t);
 
                 pt1Vel[0] = -1 * displace;
                 pt2Vel[0] = displace;
             }
+
+            // Update positions and velocities
 
             driver.ms.x[fixedPt1] += pt1Vel * dt;
             driver.ms.x[fixedPt2] += pt2Vel * dt;
@@ -218,7 +241,17 @@ int main(int argc, char* argv[])
             4. Set boundary condition (node_is_fixed) and helper function (to achieve moving boundary condition).
         */
 
+        /*
+        youngs_modulus = 1000.0;
+        damping_coeff = 2.0;
+        dt = 0.00001;
+        totalMass = 2.0;
+         */
 
+        youngs_modulus = 10.0;
+        damping_coeff = 2.0;
+        dt = 0.00001;
+        totalMass = 2.0;
 
 
         // Open obj
@@ -277,27 +310,24 @@ int main(int argc, char* argv[])
 
 
 
-
-
         // Open points
 
-        std::ifstream pointsFile ("data/points");
+        std::string filename = "data/points";
+        std::ifstream pointsFile(filename);
 
         if(pointsFile.is_open())
         {
-            std::cout << "File successfully opened." << std::endl;
+            std::cout << filename << " successfully opened." << std::endl;
         }
         else
         {
-            std::cout << "File failed to open." << std::endl;
+            std::cout << filename << " failed to open." << std::endl;
         }
 
         std::string line = "";
 
         int pointNumber = 1;
-
         bool hasRun = false;
-
         int numPoints = 0;
 
         std::getline(pointsFile, line);
@@ -305,9 +335,7 @@ int main(int argc, char* argv[])
         do
         {
             std::vector<std::string> splitLine;
-
             std::string buffer = "";
-
             std::stringstream sStream(line);
 
             while(sStream >> buffer)
@@ -337,6 +365,7 @@ int main(int argc, char* argv[])
             TV position = TV(xPos, yPos, zPos);
 
             x.push_back(position);
+
             node_is_fixed.push_back(false);
 
             m.push_back(totalMass / numPoints);
@@ -365,23 +394,21 @@ int main(int argc, char* argv[])
 
         // Open cells file
 
-        std::ifstream cellsFile ("data/cells");
+        filename = "data/cells";
+        std::ifstream cellsFile (filename);
 
         if(cellsFile.is_open())
         {
-            std::cout << "File successfully opened." << std::endl;
+            std::cout << filename << " successfully opened." << std::endl;
         }
         else
         {
-            std::cout << "File failed to open." << std::endl;
+            std::cout << filename << " failed to open." << std::endl;
         }
 
         line = "";
-
         int tetNumber = 1;
-
         hasRun = false;
-
         int numTets = 0;
 
         std::getline(cellsFile, line);
@@ -389,9 +416,7 @@ int main(int argc, char* argv[])
         do
         {
             std::vector<std::string> splitLine;
-
             std::string buffer = "";
-
             std::stringstream sStream(line);
 
             while(sStream >> buffer)
@@ -419,13 +444,24 @@ int main(int argc, char* argv[])
             int pt3 = std::stoi(splitLine[2]);
             int pt4 = std::stoi(splitLine[3]);
 
-            // Add Spring
+            // Add Springs
             springs.insert(std::pair<int, int>(pt1, pt2));
             springs.insert(std::pair<int, int>(pt1, pt3));
             springs.insert(std::pair<int, int>(pt1, pt4));
             springs.insert(std::pair<int, int>(pt2, pt3));
             springs.insert(std::pair<int, int>(pt2, pt4));
             springs.insert(std::pair<int, int>(pt3, pt4));
+
+
+            /*
+            segments.push_back(Eigen::Matrix<int,2,1>(pt1, pt2));
+            segments.push_back(Eigen::Matrix<int,2,1>(pt1, pt3));
+            segments.push_back(Eigen::Matrix<int,2,1>(pt1, pt4));
+            segments.push_back(Eigen::Matrix<int,2,1>(pt2, pt3));
+            segments.push_back(Eigen::Matrix<int,2,1>(pt2, pt4));
+            segments.push_back(Eigen::Matrix<int,2,1>(pt3, pt4));
+            */
+
 
             tetNumber++;
 
@@ -434,6 +470,7 @@ int main(int argc, char* argv[])
         cellsFile.close();
 
 
+        // Populate rest_length
         for(std::pair<int, int> p : springs)
         {
             Eigen::Matrix<int,2,1> seg = Eigen::Matrix<int,2,1>(p.first, p.second);
@@ -442,13 +479,50 @@ int main(int argc, char* argv[])
             rest_length.push_back(vec.norm());
         }
 
-        int ear1 = 2140;
-        int ear2 = 2346;
-        int tail = 1036;
+        /*
+        for(Eigen::Matrix<int,2,1> seg : segments)
+        {
+            TV vec = x[seg[0]] - x[seg[1]];
+            rest_length.push_back(vec.norm());
+        }
+        */
 
-        node_is_fixed[ear1] = true;
-        node_is_fixed[ear2] = true;
-        node_is_fixed[tail] = true;
+
+        //Ear1 orig point is 2140;
+        //Ear2 orig point is 2346;
+        //Tail orig point is 1036;
+
+        // Ear 1
+        node_is_fixed[2140] = true;
+        /*
+        node_is_fixed[962] = true;
+        node_is_fixed[2130] = true;
+        node_is_fixed[1230] = true;
+        node_is_fixed[2144] = true;
+        node_is_fixed[950] = true;
+         */
+
+        // Ear 2
+        node_is_fixed[2346] = true;
+        /*
+        node_is_fixed[1202] = true;
+        node_is_fixed[2773] = true;
+        node_is_fixed[1995] = true;
+        node_is_fixed[1203] = true;
+        node_is_fixed[1200] = true;
+        */
+
+        // Tail
+        node_is_fixed[1036] = true;
+        /*
+        node_is_fixed[1067] = true;
+        node_is_fixed[1068] = true;
+        node_is_fixed[1026] = true;
+        node_is_fixed[1014] = true;
+        node_is_fixed[1000] = true;
+        node_is_fixed[1025] = true;
+        node_is_fixed[688] = true;
+         */
 
 
         driver.helper = [&](T t, T dt)
@@ -459,13 +533,43 @@ int main(int argc, char* argv[])
             {
                 T pointXVel = 0.5 * cos(1 * t);
 
-                driver.ms.v[tail][0] = pointXVel;
+                driver.ms.v[1036][0] = pointXVel;
+                /*
+                driver.ms.v[1067][0] = pointXVel;
+                driver.ms.v[1068][0] = pointXVel;
+                driver.ms.v[1026][0] = pointXVel;
+                driver.ms.v[1014][0] = pointXVel;
+                driver.ms.v[1000][0] = pointXVel;
+                driver.ms.v[1025][0] = pointXVel;
+                driver.ms.v[688][0] = pointXVel;
+                 */
 
-                driver.ms.x[tail][0] += pointXVel * dt;
+
+                driver.ms.x[1036][0] += pointXVel * dt;
+                /*
+                driver.ms.x[1067][0] += pointXVel * dt;
+                driver.ms.x[1068][0] += pointXVel * dt;
+                driver.ms.x[1026][0] += pointXVel * dt;
+                driver.ms.x[1014][0] += pointXVel * dt;
+                driver.ms.x[1000][0] += pointXVel * dt;
+                driver.ms.x[1025][0] += pointXVel * dt;
+                driver.ms.x[688][0] += pointXVel * dt;
+                 */
+
             }
             else
             {
-                driver.ms.node_is_fixed[tail] = false;
+                driver.ms.node_is_fixed[1036] = false;
+                /*
+                driver.ms.node_is_fixed[1067] = false;
+                driver.ms.node_is_fixed[1068] = false;
+                driver.ms.node_is_fixed[1026] = false;
+                driver.ms.node_is_fixed[1014] = false;
+                driver.ms.node_is_fixed[1000] = false;
+                driver.ms.node_is_fixed[1025] = false;
+                driver.ms.node_is_fixed[688] = false;
+                 */
+
             }
 
         };

@@ -1,3 +1,5 @@
+// Modified by Nathan Devlin for CIS 563 Project 1
+
 #include <Eigen/Sparse>
 #include <unsupported/Eigen/IterativeSolvers>
 
@@ -18,6 +20,7 @@ public:
     T dt;
     TV gravity;
     std::string test;
+    T frameRate;
 
     std::function<void(T, T)> helper = [&](T, T) {};
 
@@ -26,6 +29,7 @@ public:
     {
         gravity.setZero();
         gravity(1) = -9.80665;
+        frameRate = 24.0;
     }
 
     void run(const int max_frame)
@@ -35,9 +39,10 @@ public:
         std::string output_folder = "output/" + test;
         mkdir(output_folder.c_str(), 0777);
         std::string filename = output_folder + "/" + std::to_string(0) + ".poly";
+
         ms.dumpPoly(filename);
 
-        int N_substeps = (int)(((T)1/24.0)/dt) + 1;
+        int N_substeps = (int)(( 1.0 / frameRate) / dt) + 1;
         std::cout << "Num steps: " << N_substeps << std::endl;
 
         for(int frame=1; frame<=max_frame; frame++) {
@@ -86,9 +91,14 @@ public:
 
             T dtByMass = dt / ms.m[i];
 
-            TV addedVelocity = f_spring[i] * dtByMass;
+            // Add gravitational force
+            TV addedVelocity = gravity * dt;
+
+            addedVelocity += f_spring[i] * dtByMass;
 
             addedVelocity += f_damping[i] * dtByMass;
+
+            // Update velocity and position if this point is free
 
             ms.x[i] += isFree * (addedVelocity + ms.v[i]) * dt;
 
