@@ -37,8 +37,8 @@ int main(int argc, char* argv[])
      */
 
     T youngs_modulus = 15000.0;
-    T damping_coeff = 1.0;
-    T dt = 0.0001;
+    T damping_coeff = 10.0;
+    T dt = 0.000005;
     T totalMass = 2.0;
 
     // node data
