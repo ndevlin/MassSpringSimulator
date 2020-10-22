@@ -1,4 +1,4 @@
-// Modified by Nathan Devlin for CIS 563 Project 1
+// Modified by Nathan Devlin 10/22/2020 for CIS 563 Project 1
 
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -37,7 +37,7 @@ int main(int argc, char* argv[])
     std::vector<bool> node_is_fixed;
 
     // segment data
-    std::vector<Eigen::Matrix<int,2,1> > segments;
+    std::vector<Eigen::Matrix<int,2,1>> segments;
     std::vector<T> rest_length;
 
     if (argc < 2)
@@ -81,13 +81,13 @@ int main(int argc, char* argv[])
         {
             for(int c = 0; c < clothWidthIndices; c++)
             {
-                x.push_back(TV(position));
+                x.emplace_back(position);
 
-                node_is_fixed.push_back(false);
+                node_is_fixed.emplace_back(false);
 
-                m.push_back(totalMass / totalPoints);
+                m.emplace_back(totalMass / totalPoints);
 
-                v.push_back(TV(0.0, 0.0, 0.0));
+                v.emplace_back(0.0, 0.0, 0.0);
 
                 position[0] += clothWidth / ((T)clothWidthIndices - 1.0);
             }
@@ -104,53 +104,53 @@ int main(int argc, char* argv[])
             for(c = 0; c < clothWidthIndices - 1; c++)
             {
                 //Add face for obj
-                faces.push_back(Eigen::Matrix<int,4,1>(c + r * clothHeightIndices,
-                                                       c + r * clothHeightIndices + 1,
-                                                       c + (r + 1) * clothHeightIndices + 1,
-                                                       c + (r + 1) * clothHeightIndices));
+                faces.emplace_back(c + r * clothHeightIndices,
+                                   c + r * clothHeightIndices + 1,
+                                   c + (r + 1) * clothHeightIndices + 1,
+                                   c + (r + 1) * clothHeightIndices);
 
                 //Horizontal Structural Springs
-                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
-                                                          r * clothHeightIndices + c + 1));
+                segments.emplace_back(c + r * clothHeightIndices,
+                                      r * clothHeightIndices + c + 1);
 
                 //Vertical Structural Springs
-                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
-                                                          (r + 1) * clothHeightIndices + c));
+                segments.emplace_back(c + r * clothHeightIndices,
+                                      (r + 1) * clothHeightIndices + c);
 
                 // Right Shear Springs
-                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
-                                                          (r + 1) * clothHeightIndices + c + 1));
+                segments.emplace_back(c + r * clothHeightIndices,
+                                      (r + 1) * clothHeightIndices + c + 1);
 
                 if(c != 0)
                 {
                     // Left Shear Springs
-                    segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
-                                                              (r + 1) * clothHeightIndices + c - 1));
+                    segments.emplace_back(c + r * clothHeightIndices,
+                                          (r + 1) * clothHeightIndices + c - 1);
                 }
                 if(c < clothWidthIndices - 2)
                 {
                     // Horizontal Flexion Springs
-                    segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
-                                                              r * clothHeightIndices + c + 2));
+                    segments.emplace_back(c + r * clothHeightIndices,
+                                          r * clothHeightIndices + c + 2);
                 }
                 if(r < clothHeightIndices - 2)
                 {
                     // Vertical Flexion Springs
-                    segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
-                                                              (r + 2) * clothHeightIndices + c));
+                    segments.emplace_back(c + r * clothHeightIndices,
+                                          (r + 2) * clothHeightIndices + c);
                 }
             }
             // Vertical Structural Springs
-            segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
-                                                      (r + 1) * clothHeightIndices + c));
+            segments.emplace_back(c + r * clothHeightIndices,
+                                  (r + 1) * clothHeightIndices + c);
             // Left Shear Springs
-            segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
-                                                      (r + 1) * clothHeightIndices + c - 1));
+            segments.emplace_back(c + r * clothHeightIndices,
+                                  (r + 1) * clothHeightIndices + c - 1);
             if(r < clothHeightIndices - 2)
             {
                 // Vertical Flexion Springs
-                segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
-                                                          (r + 2) * clothHeightIndices + c));
+                segments.emplace_back(c + r * clothHeightIndices,
+                                      (r + 2) * clothHeightIndices + c);
             }
         }
 
@@ -158,15 +158,15 @@ int main(int argc, char* argv[])
         for(c = 0; c < clothWidthIndices - 2; c++)
         {
             // Horizontal Structural Springs
-            segments.push_back(Eigen::Matrix<int,2,1>(c + clothHeightIndices * (clothHeightIndices - 1),
-                                                      clothHeightIndices * (clothHeightIndices - 1) + c + 1));
+            segments.emplace_back(c + clothHeightIndices * (clothHeightIndices - 1),
+                                  clothHeightIndices * (clothHeightIndices - 1) + c + 1);
             // Horizontal Flexion Springs
-            segments.push_back(Eigen::Matrix<int,2,1>(c + r * clothHeightIndices,
-                                                      r * clothHeightIndices + c + 2));
+            segments.emplace_back(c + r * clothHeightIndices,
+                                  r * clothHeightIndices + c + 2);
         }
         // Horizontal Structural Springs
-        segments.push_back(Eigen::Matrix<int,2,1>(c + clothHeightIndices * (clothHeightIndices - 1),
-                                                  clothHeightIndices * (clothHeightIndices - 1) + c + 1));
+        segments.emplace_back(c + clothHeightIndices * (clothHeightIndices - 1),
+                              clothHeightIndices * (clothHeightIndices - 1) + c + 1);
 
         // Populate rest_length
         for(Eigen::Matrix<int,2,1> seg : segments)
@@ -196,7 +196,6 @@ int main(int argc, char* argv[])
             std::cout << filename << " successfully opened." << std::endl;
 
             objBuffer << "# Object File writtenCloth.obj\n";
-            int count = 0;
             for (TV X : x)
             {
                 objBuffer << "v ";
@@ -211,7 +210,6 @@ int main(int argc, char* argv[])
                 objBuffer << "\n";
             }
             objBuffer << "\n";
-            count = 0;
             for (const Eigen::Matrix<int, 4, 1> &face : faces)
             {
                 objBuffer << "f " << (T) (face(0) + 1.0) << " " << (T) (face(1) + 1.0) <<
@@ -272,8 +270,8 @@ int main(int argc, char* argv[])
         // Set physical values to change visual properties of bunny
         // A large disparity in values usually necessitates a smaller dt time interval
         youngs_modulus = 10.0;
-        damping_coeff = 2.0;
-        dt = 0.00001;
+        damping_coeff =  2.0;
+        dt = 0.00005;
         totalMass = 2.0;
 
 
@@ -327,15 +325,13 @@ int main(int argc, char* argv[])
                 T yPos = (T) std::stod(splitLine[1]);
                 T zPos = (T) std::stod(splitLine[2]);
 
-                TV position = TV(xPos, yPos, zPos);
+                x.emplace_back(xPos, yPos, zPos);
 
-                x.push_back(position);
+                node_is_fixed.emplace_back(false);
 
-                node_is_fixed.push_back(false);
+                m.emplace_back(totalMass / numPoints);
 
-                m.push_back(totalMass / numPoints);
-
-                v.push_back(TV(0.0, 0.0, 0.0));
+                v.emplace_back(0.0, 0.0, 0.0);
 
             } while (std::getline(pointsFile, line));
 
@@ -422,13 +418,15 @@ int main(int argc, char* argv[])
             cellsFile.close();
         }
 
+        std::cout << "Number of springs: " << springs.size() << std::endl;
+
         // Populate rest_length
         for(std::pair<int, int> p : springs)
         {
             Eigen::Matrix<int,2,1> seg = Eigen::Matrix<int,2,1>(p.first, p.second);
-            segments.push_back(seg);
+            segments.emplace_back(p.first, p.second);
             TV vec = x[seg[0]] - x[seg[1]];
-            rest_length.push_back(vec.norm());
+            rest_length.emplace_back(vec.norm());
         }
 
         // Fix handle points
@@ -445,17 +443,17 @@ int main(int argc, char* argv[])
             // TODO
 
             // Pull back tail for 1 second then release
-            if(t < 1.1)
+            if(t < 1.0)
             {
-                T pointXVel = 0.5 * cos(1 * t);
+                T pointXVel = 0.4 * cos(t);
 
-                driver.ms.v[1036][0] = pointXVel;
+                driver.ms.v[tail][0] = pointXVel;
 
-                driver.ms.x[1036][0] += pointXVel * dt;
+                driver.ms.x[tail][0] += pointXVel * dt;
             }
             else
             {
-                driver.ms.node_is_fixed[1036] = false;
+                driver.ms.node_is_fixed[tail] = false;
             }
 
         };

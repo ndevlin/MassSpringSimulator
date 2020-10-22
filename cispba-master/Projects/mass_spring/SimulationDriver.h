@@ -1,4 +1,4 @@
-// Modified by Nathan Devlin for CIS 563 Project 1
+// Modified by Nathan Devlin 10/22/2020 for CIS 563 Project 1
 
 #include <Eigen/Sparse>
 #include <unsupported/Eigen/IterativeSolvers>

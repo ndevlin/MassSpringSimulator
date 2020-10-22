@@ -1,4 +1,4 @@
-// Modified by Nathan Devlin for CIS 563 Project 1
+// Modified by Nathan Devlin 10/22/2020 for CIS 563 Project 1
 
 #include <Eigen/Core>
 #include <Eigen/Dense>
@@ -31,7 +31,7 @@ public:
         // Initialize f to size of number of points
         for(int i = 0; i < x.size(); i++)
         {
-            f.push_back(TV(0.0, 0.0, 0.0));
+            f.emplace_back(0.0, 0.0, 0.0);
         }
 
         // Calculate spring forces
@@ -63,7 +63,7 @@ public:
         // Initialize f to number of points
         for(int i = 0; i < x.size(); i++)
         {
-            f.push_back(TV(0.0, 0.0, 0.0));
+            f.emplace_back(0.0, 0.0, 0.0);
         }
 
         // Calculate damping forces
@@ -95,7 +95,7 @@ public:
     }
 
 
-    void dumpPoly(std::string filename)
+    void dumpPoly(const std::string& filename)
     {
         std::ofstream fs;
         fs.open(filename);
@@ -119,7 +119,7 @@ public:
 
 
     // Function to load in an obj file
-    void openObj(std::string filename)
+    void openObj(const std::string& filename)
     {
         std::ifstream fileBuffer(filename);
 
@@ -137,7 +137,7 @@ public:
 
             while (std::getline(fileBuffer, line))
             {
-                if (line == "" || line[0] == ' ' || line[0] == '#')
+                if (line.empty() || line[0] == ' ' || line[0] == '#')
                 {
                     continue;
                 }
