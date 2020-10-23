@@ -417,9 +417,7 @@ int main(int argc, char* argv[])
 
             cellsFile.close();
         }
-
-        std::cout << "Number of springs: " << springs.size() << std::endl;
-
+        
         // Populate rest_length
         for(std::pair<int, int> p : springs)
         {
