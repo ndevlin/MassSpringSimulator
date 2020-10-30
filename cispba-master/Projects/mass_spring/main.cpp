@@ -404,20 +404,28 @@ int main(int argc, char* argv[])
                 int pt4 = std::stoi(splitLine[3]);
 
                 // Add Springs
-                springs.insert(std::pair<int, int>(pt1, pt2));
-                springs.insert(std::pair<int, int>(pt1, pt3));
-                springs.insert(std::pair<int, int>(pt1, pt4));
-                springs.insert(std::pair<int, int>(pt2, pt3));
-                springs.insert(std::pair<int, int>(pt2, pt4));
-                springs.insert(std::pair<int, int>(pt3, pt4));
+                if(springs.count(std::pair<int, int>(pt2, pt1)) == 0)
+                    springs.insert(std::pair<int, int>(pt1, pt2));
+                if(springs.count(std::pair<int, int>(pt3, pt1)) == 0)
+                    springs.insert(std::pair<int, int>(pt1, pt3));
+                if(springs.count(std::pair<int, int>(pt4, pt1)) == 0)
+                    springs.insert(std::pair<int, int>(pt1, pt4));
+                if(springs.count(std::pair<int, int>(pt3, pt2)) == 0)
+                    springs.insert(std::pair<int, int>(pt2, pt3));
+                if(springs.count(std::pair<int, int>(pt4, pt2)) == 0)
+                    springs.insert(std::pair<int, int>(pt2, pt4));
+                if(springs.count(std::pair<int, int>(pt4, pt3)) == 0)
+                    springs.insert(std::pair<int, int>(pt3, pt4));
 
                 tetNumber++;
 
             } while (std::getline(cellsFile, line));
 
+            std::cout << "Num springs: " << springs.size() << std::endl;
+
             cellsFile.close();
         }
-        
+
         // Populate rest_length
         for(std::pair<int, int> p : springs)
         {
